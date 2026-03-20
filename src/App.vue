@@ -1,47 +1,63 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script setup>
+import { ref } from 'vue';
+
+const userInfo = ref({
+  username: '',
+  gender: 'male',
+  hobbies: []
+});
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <h1>3주차 실습 시작</h1>
+  <div class="container">
+    <h2> 실시간 회원가입 폼</h2>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div class="field">
+      <label>이름: </label>
+      <input type="text" v-model="userInfo.username" placeholder="이름을 입력하세요">
     </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <div class="field">
+      <label>성별: </label>
+      <label><input type="radio" v-model="userInfo.gender" value="male">남성</label>
+      <label><input type="radio" v-model="userInfo.gender" value="female">여성</label>
+    </div>
+    
+    <div class="field">
+      <label>취미: </label>
+      <label><input type="checkbox" v-model="userInfo.hobbies" value="코딩">코딩</label>
+      <label><input type="checkbox" v-model="userInfo.hobbies" value="영화">영화</label>
+      <label><input type="checkbox" v-model="userInfo.hobbies" value="게임">게임</label>
+    </div>
+  </div>
+
+  <hr>
+  <h3>실시간 데이터 반영 결과:</h3>
+  <pre class="result=box">{{ userInfo }}</pre>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.container {
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.field {
+  margin-bottom: 20px;
 }
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+label {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.result-box {
+  background: #282c34;
+  color: #abb2bf;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: bold;
 }
 </style>
